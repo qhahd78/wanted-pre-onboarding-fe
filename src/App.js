@@ -1,8 +1,12 @@
 import React from 'react';
-import PreAssignmentGuide from './pages/PreAssignmentGuide';
+import Router from './routes/router';
 
 function App() {
-  return <PreAssignmentGuide />;
+  return (
+    <>
+      <Router />
+    </>
+  );
 }
 
 export default App;
