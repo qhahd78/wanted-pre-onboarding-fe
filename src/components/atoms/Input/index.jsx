@@ -1,7 +1,8 @@
 import React from 'react';
+import { StyledInput } from './style';
 
-const index = () => {
-  return <div>index</div>;
+const Input = ({ placeholder, type = 'email' }) => {
+  return <StyledInput type={type} placeholder={placeholder} />;
 };
 
-export default index;
+export default Input;

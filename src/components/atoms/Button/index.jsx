@@ -1,7 +1,8 @@
 import React from 'react';
+import { StyledButton } from './style';
 
-const index = () => {
-  return <div>index</div>;
+const Button = () => {
+  return <StyledButton>로그인</StyledButton>;
 };
 
-export default index;
+export default Button;
