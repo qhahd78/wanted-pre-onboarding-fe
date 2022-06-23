@@ -1,15 +1,24 @@
 import React from 'react';
 import Input from '../../atoms/Input';
 import {
+  Facebook,
+  FacebookBox,
+  FindPassword,
   Line,
   LineBox,
   LoginContainer,
   LoginContainer2,
+  LoginContainer3,
   LoginContent,
   LoginLayout,
   Logo,
+  StoreContainer,
+  StoreImg,
 } from './style';
 import logo from '../../../assets/images/logo.png';
+import facebook from '../../../assets/images/facebook.png';
+import appstore from '../../../assets/images/appstore.png';
+import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
 
 const Login = () => {
@@ -26,13 +35,26 @@ const Login = () => {
             <p>또는</p>
             <Line />
           </LineBox>
-          <p>페이스북으로 로그인</p>
-          <p>비밀번호를 잊으셨나요?</p>
+          <FacebookBox>
+            <Facebook src={facebook} />
+            <p>Facebook으로 로그인</p>
+          </FacebookBox>
+          <FindPassword>비밀번호를 잊으셨나요?</FindPassword>
         </LoginContent>
       </LoginContainer>
       <LoginContainer2>
-        <p>계정이 없으신가요 ? </p>
+        <p>
+          <span>계정이 없으신가요?</span>
+          <span> 가입하기</span>
+        </p>
       </LoginContainer2>
+      <LoginContainer3>
+        <p>앱을 다운로드 하세요.</p>
+        <StoreContainer>
+          <StoreImg src={appstore} />
+          <StoreImg src={googleplay} />
+        </StoreContainer>
+      </LoginContainer3>
     </LoginLayout>
   );
 };
