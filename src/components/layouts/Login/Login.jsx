@@ -20,16 +20,43 @@ import facebook from '../../../assets/images/facebook.png';
 import appstore from '../../../assets/images/appstore.png';
 import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
+import { useState } from 'react';
 
 const Login = () => {
+  const [inputs, setinputs] = useState({});
+
+  const handleInputs = (e) => {
+    setinputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    if (inputs.id && inputs.pw) {
+      window.localStorage.setItem('id', inputs.id);
+      window.localStorage.setItem('pw', inputs.pw);
+      console.log('success');
+    }
+  };
+
   return (
     <LoginLayout>
       <LoginContainer>
         <Logo src={logo} />
         <LoginContent>
-          <Input placeholder={'전화번호, 사용자 이름 또는 이메일'} />
-          <Input type="password" placeholder="비밀번호" />
-          <Button />
+          <Input
+            inputName="id"
+            placeholder={'전화번호, 사용자 이름 또는 이메일'}
+            onChangeFunc={handleInputs}
+          />
+          <Input
+            inputName="pw"
+            type="password"
+            placeholder="비밀번호"
+            onChangeFunc={handleInputs}
+          />
+          <Button onClickFunc={handleSubmit}>로그인</Button>
           <LineBox>
             <Line />
             <p>또는</p>
