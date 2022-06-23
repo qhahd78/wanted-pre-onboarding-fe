@@ -10,6 +10,8 @@ const COLOR = {
   GRAY_2: '#262626',
   // or color
   GRAY_3: '#8E8E8E',
+  // search bar color
+  GRAY_4: '#efefef',
 
   // button color - disabled
   BLUE_0: '#B2DFFC',
