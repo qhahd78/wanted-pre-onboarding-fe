@@ -1,12 +1,16 @@
+/* eslint-disable react/jsx-key */
 import {
   BookmarkSimple,
   ChatCircleDots,
   DotsThree,
   HeartStraight,
+  Key,
   PaperPlaneTilt,
   Smiley,
+  Spinner,
 } from 'phosphor-react';
 import React from 'react';
+import { useState } from 'react';
 import {
   Comment,
   CommentContainer,
@@ -22,17 +26,37 @@ import {
   WriterName,
 } from './style';
 
-const Feed = () => {
+const Feed = ({
+  key,
+  nickname,
+  likeNum,
+  img,
+  comments,
+  inputhandler,
+  inputValue,
+  onClickFunc,
+  enterFunc,
+  newComments,
+}) => {
+  const [isLoading, setisLoading] = useState(true);
+
+  const onLoadFunc = () => {
+    setisLoading(false);
+  };
+
   return (
     <FeedContainer>
       <FeedHeader>
         <ProfileContainer>
           <Profile />
-          <p>Umin</p>
+          <p>{nickname}</p>
         </ProfileContainer>
         <DotsThree size={32} />
       </FeedHeader>
-      <ImgContainer>사진이용</ImgContainer>
+      <ImgContainer>
+        {isLoading ? <Spinner size={32} /> : <></>}
+        <img alt="img load error" src={img} onLoad={onLoadFunc} />
+      </ImgContainer>
       <IconContainer>
         <div>
           <HeartStraight size={24} />
@@ -43,23 +67,39 @@ const Feed = () => {
           <BookmarkSimple size={24} />
         </div>
       </IconContainer>
-      <LikeCount>좋아요 0개</LikeCount>
+      <LikeCount>좋아요 {likeNum}개</LikeCount>
       <CommentContainer>
-        <Comment>
-          <WriterName>mimmi</WriterName>
-          <p>안녕요~</p>
-        </Comment>
-        <Comment>
-          <WriterName>mimmi</WriterName>
-          <p>안녕요~</p>
-        </Comment>
+        {comments.map((comment) => (
+          <Comment>
+            <WriterName>{comment.nickname}</WriterName>
+            <p>{comment.comment}</p>
+          </Comment>
+        ))}
+        {newComments.length > 0 ? (
+          newComments.map((newComment) => (
+            <Comment>
+              <WriterName>Umin</WriterName>
+              <p>{newComment.Umin}</p>
+            </Comment>
+          ))
+        ) : (
+          <></>
+        )}
       </CommentContainer>
       <CommentInputConatiner>
         <CommentInput>
           <Smiley size={32} />
-          <input type="text" placeholder="댓글달기..." />
+          <input
+            name={nickname}
+            type="text"
+            placeholder="댓글달기..."
+            onChange={inputhandler}
+            onKeyPress={enterFunc}
+          />
         </CommentInput>
-        <button>게시</button>
+        <button name={nickname} onClick={onClickFunc}>
+          게시
+        </button>
       </CommentInputConatiner>
     </FeedContainer>
   );

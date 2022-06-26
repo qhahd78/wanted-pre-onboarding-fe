@@ -6,6 +6,7 @@ const FeedContainer = styled.div`
   margin: 0 auto;
   border: 1px solid ${COLOR.GRAY_4};
   margin-bottom: 18px;
+  background-color: ${COLOR.WHITE};
 `;
 
 const FeedHeader = styled.div`
@@ -32,7 +33,12 @@ const Profile = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  width: inherit;
+  width: 470px;
+  text-align: center;
+
+  img {
+    width: 468px;
+  }
 `;
 
 const IconContainer = styled.div`
@@ -77,6 +83,7 @@ const CommentInputConatiner = styled.div`
   padding: 8px 8px 8px 12px;
 
   button {
+    width: 50px;
     background-color: white;
     color: ${COLOR.BLUE_1};
     font-weight: 700;
@@ -87,8 +94,10 @@ const CommentInputConatiner = styled.div`
 `;
 
 const CommentInput = styled.div`
+  width: 100%;
   display: flex;
   input {
+    width: 100%;
     padding: 0 8px;
     ::placeholder {
       color: ${COLOR.GRAY_3};

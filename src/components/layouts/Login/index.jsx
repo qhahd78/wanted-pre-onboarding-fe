@@ -21,19 +21,48 @@ import appstore from '../../../assets/images/appstore.png';
 import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
 import { useState } from 'react';
+// import { useEffect } from 'react';
 
 const Login = () => {
   const [inputs, setinputs] = useState({});
+  const [isIdValid, setisIdValid] = useState(false);
+  const [isPwValid, setisPwValid] = useState(true);
+  const [Disabled, setDisabled] = useState(true);
 
   const handleInputs = (e) => {
     setinputs({
       ...inputs,
       [e.target.name]: e.target.value,
     });
+
+    if (isIdValid && isPwValid) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+
+    if (inputs.id) {
+      checkIdValidation();
+    }
+
+    if (inputs.pw) {
+      checkPwValidation();
+    }
   };
 
+  const checkIdValidation = () => {
+    const validEmail = /\w+@\w+\.\w+(\. \w+)?/;
+    if (validEmail.test(inputs.id)) {
+      setisIdValid(true);
+    } else {
+      setisIdValid(false);
+    }
+  };
+
+  const checkPwValidation = () => {};
+
   const handleSubmit = (e) => {
-    if (inputs.id && inputs.pw) {
+    if (isIdValid && isPwValid) {
       window.localStorage.setItem('id', inputs.id);
       window.localStorage.setItem('pw', inputs.pw);
       console.log('success');
@@ -44,7 +73,11 @@ const Login = () => {
     <LoginLayout>
       <LoginContainer>
         <Logo src={logo} />
-        <LoginContent>
+        <LoginContent
+          isIdValid={isIdValid}
+          isPwValid={isPwValid}
+          disabled={Disabled}
+        >
           <Input
             inputName="id"
             placeholder={'전화번호, 사용자 이름 또는 이메일'}
@@ -56,7 +89,9 @@ const Login = () => {
             placeholder="비밀번호"
             onChangeFunc={handleInputs}
           />
-          <Button onClickFunc={handleSubmit}>로그인</Button>
+          <Button onClickFunc={handleSubmit} disabled={Disabled}>
+            로그인
+          </Button>
           <LineBox>
             <Line />
             <p>또는</p>

@@ -28,10 +28,18 @@ const Logo = styled.img`
 const LoginContent = styled.div`
   & > input:nth-child(1) {
     margin-bottom: 10px;
+    border-color: ${(props) => (props.isIdValid ? '' : COLOR.RED)};
   }
 
   & > input + input {
     margin-bottom: 20px;
+    border-color: ${(props) => (props.isPwValid ? '' : COLOR.RED)};
+  }
+  & > button {
+    background-color: ${(props) => (props.disabled ? '' : COLOR.BLUE_1)};
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 

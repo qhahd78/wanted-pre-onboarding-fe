@@ -21,6 +21,9 @@ const COLOR = {
   BLUE_3: '#385185',
   // find password color
   BLUE_4: '#00376B',
+
+  // error color
+  RED: '#FE5336',
 };
 
 export { COLOR };
