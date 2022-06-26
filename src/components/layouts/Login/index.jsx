@@ -21,7 +21,6 @@ import appstore from '../../../assets/images/appstore.png';
 import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
 import { useState } from 'react';
-// import { useEffect } from 'react';
 
 const Login = () => {
   const [inputs, setinputs] = useState({});

@@ -2,17 +2,16 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import MainPage from '../pages/MainPage';
-import Main from '../pages/MainPage';
-import AuthRouter from './AuthRouter';
 
-const Router = () => {
+const Router = ({ isLogin }) => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route element={<AuthRouter />}>
-          <Route path="/main" element={<MainPage />} />
-        </Route>
+        {isLogin ? (
+          <Route path="/" element={<MainPage />} />
+        ) : (
+          <Route path="/" element={<LoginPage />} />
+        )}
       </Routes>
     </BrowserRouter>
   );

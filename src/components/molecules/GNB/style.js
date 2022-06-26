@@ -10,6 +10,7 @@ const GNBContainer = styled.nav`
   z-index: 5;
   padding: 0 120px;
   position: sticky;
+  top: 0;
   background-color: ${COLOR.WHITE};
   border-bottom: 1px solid ${COLOR.GRAY_1};
 
