@@ -31,6 +31,11 @@ const Main = () => {
     }
   };
 
+  const logoutFunc = (e) => {
+    window.localStorage.removeItem('id');
+    window.localStorage.removeItem('pw');
+  };
+
   const fetch = async () => {
     try {
       const feeds = await axios.get('/data/feeds.json');
@@ -46,7 +51,7 @@ const Main = () => {
 
   return (
     <MainLayout>
-      <GNB />
+      <GNB logoutFunc={logoutFunc} />
       <MainContainer>
         {Feeds.map((feed) => (
           <Feed

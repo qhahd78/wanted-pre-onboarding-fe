@@ -31,6 +31,10 @@ const LoginContent = styled.div`
     border-color: ${(props) => (props.isIdValid ? '' : COLOR.RED)};
   }
 
+  & > input:nth-child(2) {
+    border-color: ${(props) => (props.isPwValid ? '' : COLOR.RED)};
+  }
+
   & > input + input {
     margin-bottom: 20px;
     border-color: ${(props) => (props.isPwValid ? '' : COLOR.RED)};
@@ -95,7 +99,7 @@ const LoginContainer2 = styled(LoginContainer)`
 
   p > span + span {
     font-weight: 700;
-    color: ${COLOR.BLUE_0};
+    color: ${COLOR.BLUE_1};
     :hover {
       cursor: pointer;
     }

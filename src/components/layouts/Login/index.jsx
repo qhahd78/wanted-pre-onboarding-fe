@@ -21,11 +21,12 @@ import appstore from '../../../assets/images/appstore.png';
 import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const Login = () => {
   const [inputs, setinputs] = useState({});
   const [isIdValid, setisIdValid] = useState(false);
-  const [isPwValid, setisPwValid] = useState(true);
+  const [isPwValid, setisPwValid] = useState(false);
   const [Disabled, setDisabled] = useState(true);
 
   const handleInputs = (e) => {
@@ -33,40 +34,50 @@ const Login = () => {
       ...inputs,
       [e.target.name]: e.target.value,
     });
+  };
 
+  const checkDisabled = () => {
+    // 둘 다 로그인 가능할 때만 disable false 로 변경
     if (isIdValid && isPwValid) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-
-    if (inputs.id) {
-      checkIdValidation();
-    }
-
-    if (inputs.pw) {
-      checkPwValidation();
-    }
   };
 
   const checkIdValidation = () => {
     const validEmail = /\w+@\w+\.\w+(\. \w+)?/;
-    if (validEmail.test(inputs.id)) {
+    const exEmail = 'abc@naver.com';
+    if (validEmail.test(inputs.id) && inputs.id === exEmail) {
+      checkDisabled();
       setisIdValid(true);
     } else {
       setisIdValid(false);
     }
   };
 
-  const checkPwValidation = () => {};
+  const checkPwValidation = () => {
+    const validPw = /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
+    const exPw = 'Qwertyuiop123@';
+    if (validPw.test(inputs.pw) && inputs.pw === exPw) {
+      checkDisabled();
+      setisPwValid(true);
+    } else {
+      setisPwValid(false);
+    }
+  };
 
   const handleSubmit = (e) => {
     if (isIdValid && isPwValid) {
       window.localStorage.setItem('id', inputs.id);
       window.localStorage.setItem('pw', inputs.pw);
-      console.log('success');
     }
   };
+
+  useEffect(() => {
+    checkIdValidation();
+    checkPwValidation();
+  }, [inputs.id, inputs.pw, inputs, Disabled, checkDisabled]);
 
   return (
     <LoginLayout>

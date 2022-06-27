@@ -19,7 +19,7 @@ import {
 } from 'phosphor-react';
 import { COLOR } from '../../../styles/colors';
 
-const GNB = () => {
+const GNB = ({ logoutFunc }) => {
   return (
     <GNBContainer>
       <LogoContainer>
@@ -36,7 +36,7 @@ const GNB = () => {
         <Compass size={32} />
         <Heart size={32} />
         <LogoutBox>
-          <p>Logout</p>
+          <p onClick={logoutFunc}>Logout</p>
         </LogoutBox>
       </IconContainer>
     </GNBContainer>
