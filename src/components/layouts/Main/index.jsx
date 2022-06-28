@@ -22,7 +22,6 @@ const Main = () => {
     if (inputValue.content.length > 0) {
       setComments(Comments.concat(inputValue));
     }
-    console.log(Comments);
     setinputValue({ nickname: 'Umin', content: '' });
   };
 
