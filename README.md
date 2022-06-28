@@ -43,8 +43,26 @@ yarn start
 
 - atoms : button, input 과 같이 재사용성이 높은 가장 작은 단위 컴포넌트
 - molecules : Feed, GNB 와 같이 재사용성이 높은 중간 단위 컴포넌트
-- layouts : 페이지 바로 아래 단위 컴포넌트로 함수 정의, data 불러오기 등 기능적인 부분을 수행하는 컴포넌트
+- layouts : 페이지 바로 아래 단위 컴포넌트로 함수 정의, data 불러오기 등 기능적인 부분을 수행하는 컴포넌트 => 로직을 layout 단에서 모두 관리할 수 있음
 - pages : 최종 page 컴포넌트
+
+# :: 기술 스택
+
+```
+"axios": "^0.27.2",
+"phosphor-react": "^1.4.1",
+"react": "^18.1.0",
+"react-dom": "^18.1.0",
+"react-router-dom": "^6.3.0",
+"react-scripts": "5.0.1",
+"styled-components": "^5.3.5",
+"styled-reset": "^4.4.0",
+"web-vitals": "^2.1.4"
+```
+
+- `json data` 를 비동기 방식으로 불러오기 위하여 axios 를 사용
+- 다양한 아이콘 사용을 위해 `phosphor-react` 를 사용
+- `styled-components` 를 활용하여 `CSS-In-Js` 방식을 사용
 
 # :: 개발하지 못한 기능
 
