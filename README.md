@@ -30,7 +30,9 @@ yarn start
 
 ![image](https://user-images.githubusercontent.com/64029753/176170326-d711dae5-3ac0-431e-9b79-31aea1f8d4ab.png)
 
-- GNB : 640px 미만일 경우 search bar 사라지면서 space-between 처리, position: sticky 를 적용하여 항상 상단에 고정되도록 하였음
+![image](https://user-images.githubusercontent.com/64029753/176173478-3d9a624d-236e-4ffc-8dbd-166f48cb38a7.png)
+
+- GNB : 640px 미만일 경우 search bar 사라지면서 space-between 처리, position: sticky 를 적용하여 항상 상단에 고정되도록 하였음, 로그아웃 버튼 클릭시 localStorage 에 있는 id/pw 삭제
 - feed : margin: 0 autoo 로 너비에 상관 없이 항상 가운데로 피드들이 위치
 - image 가 로딩되지 않았을 경우 로딩 아이콘 출력, 로딩이 다 되면 이미지 출력
 - 댓글 입력 후 엔터키 혹은 버튼 클릭시 피드에 댓글이 달림
