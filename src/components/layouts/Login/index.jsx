@@ -22,18 +22,24 @@ import googleplay from '../../../assets/images/googleplay.png';
 import Button from '../../atoms/Button';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const Login = () => {
-  const [inputs, setinputs] = useState({});
   const [isIdValid, setisIdValid] = useState(false);
   const [isPwValid, setisPwValid] = useState(false);
   const [Disabled, setDisabled] = useState(true);
 
+  const idRef = useRef();
+  const pwRef = useRef();
+
   const handleInputs = (e) => {
-    setinputs({
-      ...inputs,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === 'id') {
+      idRef.current = e.target.value;
+    } else {
+      pwRef.current = e.target.value;
+    }
+    checkIdValidation();
+    checkPwValidation();
   };
 
   const checkDisabled = () => {
@@ -48,7 +54,7 @@ const Login = () => {
   const checkIdValidation = () => {
     const validEmail = /\w+@\w+\.\w+(\. \w+)?/;
     const exEmail = 'abc@naver.com';
-    if (validEmail.test(inputs.id) && inputs.id === exEmail) {
+    if (validEmail.test(idRef.current) && idRef.current === exEmail) {
       checkDisabled();
       setisIdValid(true);
     } else {
@@ -59,7 +65,7 @@ const Login = () => {
   const checkPwValidation = () => {
     const validPw = /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
     const exPw = 'Qwertyuiop123@';
-    if (validPw.test(inputs.pw) && inputs.pw === exPw) {
+    if (validPw.test(pwRef.current) && pwRef.current === exPw) {
       checkDisabled();
       setisPwValid(true);
     } else {
@@ -69,15 +75,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     if (isIdValid && isPwValid) {
-      window.localStorage.setItem('id', inputs.id);
-      window.localStorage.setItem('pw', inputs.pw);
+      window.localStorage.setItem('id', idRef.current);
+      window.localStorage.setItem('pw', pwRef.current);
     }
   };
 
   useEffect(() => {
     checkIdValidation();
     checkPwValidation();
-  }, [inputs.id, inputs.pw, inputs, Disabled, checkDisabled]);
+  }, [idRef.current, pwRef.current]);
 
   return (
     <LoginLayout>
@@ -92,12 +98,14 @@ const Login = () => {
             inputName="id"
             placeholder={'전화번호, 사용자 이름 또는 이메일'}
             onChangeFunc={handleInputs}
+            ref={idRef}
           />
           <Input
             inputName="pw"
             type="password"
             placeholder="비밀번호"
             onChangeFunc={handleInputs}
+            ref={pwRef}
           />
           <Button onClickFunc={handleSubmit} disabled={Disabled}>
             로그인

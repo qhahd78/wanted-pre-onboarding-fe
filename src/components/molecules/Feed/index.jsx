@@ -9,7 +9,7 @@ import {
   Smiley,
   Spinner,
 } from 'phosphor-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {
   Comment,
@@ -33,18 +33,12 @@ const Feed = ({
   onClickFunc,
   enterFunc,
   newComments,
-  // input,0
-  // setInput,
 }) => {
   const [isLoading, setisLoading] = useState(true);
 
   const onLoadFunc = () => {
     setisLoading(false);
   };
-
-  // if (feed.id === inputValue.id) {
-  //   setInput(inputValue.value);
-  // }
 
   return (
     <FeedContainer id={feed.id}>
@@ -71,17 +65,17 @@ const Feed = ({
       </IconContainer>
       <LikeCount>좋아요 {feed.likeNum}개</LikeCount>
       <CommentContainer>
-        {/* {feed.comments.map((comment) => (
-          <Comment>
+        {feed.comments.map((comment) => (
+          <Comment key={comment.id}>
             <WriterName>{comment.nickname}</WriterName>
             <p>{comment.comment}</p>
           </Comment>
-        ))} */}
+        ))}
         {newComments.length > 0 ? (
           newComments.map((newComment) => (
             <Comment>
               <WriterName>{newComment.nickname}</WriterName>
-              <p>{newComment.comment}</p>
+              <p>{newComment.content}</p>
             </Comment>
           ))
         ) : (
@@ -96,12 +90,17 @@ const Feed = ({
             name={feed.nickname}
             type="text"
             placeholder="댓글달기..."
-            onChange={(e) => inputhandler(e, feed)}
-            value={inputValue.comment}
-            onKeyPress={(e) => enterFunc(e, feed)}
+            onChange={inputhandler}
+            value={inputValue.content}
+            onKeyPress={enterFunc}
           />
         </CommentInput>
-        <button id={feed.id} onClick={(e) => onClickFunc(e, feed)}>
+        <button
+          id={feed.id}
+          onClick={(e) => {
+            onClickFunc(e, feed);
+          }}
+        >
           게시
         </button>
       </CommentInputConatiner>

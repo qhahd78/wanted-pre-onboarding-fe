@@ -70,7 +70,7 @@ const WriterName = styled.p`
   padding-right: 8px;
 `;
 
-const Comment = styled.p`
+const Comment = styled.div`
   display: flex;
   margin-bottom: 8px;
 `;

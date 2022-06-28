@@ -7,10 +7,12 @@
       "likeNum": 2,
       "comments": [
         {
+          "id": 0,
           "nickname": "yumin",
           "comment": "안녕하세욜~"
         },
         {
+          "id": 1,
           "nickname": "lala",
           "comment": "네네 안녕요 ~ "
         }
@@ -23,6 +25,7 @@
       "likeNum": 1,
       "comments": [
         {
+          "id": 0,
           "nickname": "lala",
           "comment": "와우 과제 너무 재밌는데요 ?"
         }
@@ -35,14 +38,17 @@
       "likeNum": 5,
       "comments": [
         {
+          "id": 0,
           "nickname": "Umin",
           "comment": "Love Yourself :)"
         },
         {
+          "id": 1,
           "nickname": "Umin",
           "comment": "Love Yourself :)"
         },
         {
+          "id": 2,
           "nickname": "Umin",
           "comment": "Love Yourself :)"
         }
