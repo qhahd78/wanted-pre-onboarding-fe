@@ -10,25 +10,41 @@ const Main = () => {
   const [Feeds, setFeeds] = useState([]);
   const [inputValue, setinputValue] = useState({});
   const [Comments, setComments] = useState([]);
-  const inputhandler = (e) => {
-    setinputValue({
-      ...inputValue,
-      Umin: e.target.value,
-    });
+
+  const inputhandler = (e, feed) => {
     console.log(inputValue);
-  };
-
-  const onClickFuc = (e) => {
-    if (inputValue.Umin.length > 0) {
-      setComments(Comments.concat(inputValue));
-      console.log(Comments);
+    if (!(e.target.id != feed.id)) {
+      setinputValue({
+        ...inputValue,
+        id: e.target.id,
+        nickname: 'Umin',
+        comment: e.target.value,
+      });
     }
   };
 
-  const enterFunc = (e) => {
-    if (e.key === 'Enter' && inputValue.Umin.length > 0) {
-      setComments(inputValue);
+  const onClickFuc = (e, feed) => {
+    if (!(e.target.id != feed.id)) {
+      if (inputValue.comment.length > 0) {
+        const newComments = Comments.concat(inputValue);
+        setComments(newComments);
+        setinputValue({ nickname: 'Umin', comment: '' });
+      }
     }
+    console.log(Comments);
+  };
+
+  const enterFunc = (e, feed) => {
+    if (
+      e.target.id === feed.id &&
+      e.key === 'Enter' &&
+      inputValue.comment.length > 0
+    ) {
+      const newComments = Comments.concat(inputValue);
+      setComments(newComments);
+    }
+    setinputValue({ nickname: 'Umin', comment: '' });
+    // console.log(feed);
   };
 
   const logoutFunc = (e) => {
@@ -53,18 +69,39 @@ const Main = () => {
     <MainLayout>
       <GNB logoutFunc={logoutFunc} />
       <MainContainer>
+        {/* {Feeds.map((feed) => {
+          feed.id != FeedId ? (
+            <Feed
+              key={feed.id}
+              feed={feed}
+              inputhandler={inputhandler}
+              inputValue={inputValue}
+              onClickFunc={onClickFuc}
+              enterFunc={enterFunc}
+              newComments={Comments}
+            />
+          ) : (
+            <Feed
+              key={feed.id}
+              feed={feed}
+              inputhandler={inputhandler}
+              inputValue={inputValue}
+              onClickFunc={onClickFuc}
+              enterFunc={enterFunc}
+            />
+          );
+        })} */}
         {Feeds.map((feed) => (
           <Feed
-            key={feed.key}
-            nickname={feed.nickname}
-            likeNum={feed.likeNum}
-            img={feed.img}
-            comments={feed.comments}
+            key={feed.id}
+            feed={feed}
             inputhandler={inputhandler}
             inputValue={inputValue}
             onClickFunc={onClickFuc}
             enterFunc={enterFunc}
             newComments={Comments}
+            // input={Input}
+            // setInput={setInput}
           />
         ))}
       </MainContainer>

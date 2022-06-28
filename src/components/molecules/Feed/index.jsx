@@ -27,16 +27,14 @@ import {
 } from './style';
 
 const Feed = ({
-  key,
-  nickname,
-  likeNum,
-  img,
-  comments,
+  feed,
   inputhandler,
   inputValue,
   onClickFunc,
   enterFunc,
   newComments,
+  // input,0
+  // setInput,
 }) => {
   const [isLoading, setisLoading] = useState(true);
 
@@ -44,18 +42,22 @@ const Feed = ({
     setisLoading(false);
   };
 
+  // if (feed.id === inputValue.id) {
+  //   setInput(inputValue.value);
+  // }
+
   return (
-    <FeedContainer>
+    <FeedContainer id={feed.id}>
       <FeedHeader>
         <ProfileContainer>
           <Profile />
-          <p>{nickname}</p>
+          <p>{feed.nickname}</p>
         </ProfileContainer>
         <DotsThree size={32} />
       </FeedHeader>
       <ImgContainer>
         {isLoading ? <Spinner size={32} /> : <></>}
-        <img alt="img load error" src={img} onLoad={onLoadFunc} />
+        <img alt="img load error" src={feed.img} onLoad={onLoadFunc} />
       </ImgContainer>
       <IconContainer>
         <div>
@@ -67,19 +69,19 @@ const Feed = ({
           <BookmarkSimple size={24} />
         </div>
       </IconContainer>
-      <LikeCount>좋아요 {likeNum}개</LikeCount>
+      <LikeCount>좋아요 {feed.likeNum}개</LikeCount>
       <CommentContainer>
-        {comments.map((comment) => (
+        {/* {feed.comments.map((comment) => (
           <Comment>
             <WriterName>{comment.nickname}</WriterName>
             <p>{comment.comment}</p>
           </Comment>
-        ))}
+        ))} */}
         {newComments.length > 0 ? (
           newComments.map((newComment) => (
             <Comment>
-              <WriterName>Umin</WriterName>
-              <p>{newComment.Umin}</p>
+              <WriterName>{newComment.nickname}</WriterName>
+              <p>{newComment.comment}</p>
             </Comment>
           ))
         ) : (
@@ -90,14 +92,16 @@ const Feed = ({
         <CommentInput>
           <Smiley size={32} />
           <input
-            name={nickname}
+            id={feed.id}
+            name={feed.nickname}
             type="text"
             placeholder="댓글달기..."
-            onChange={inputhandler}
-            onKeyPress={enterFunc}
+            onChange={(e) => inputhandler(e, feed)}
+            value={inputValue.comment}
+            onKeyPress={(e) => enterFunc(e, feed)}
           />
         </CommentInput>
-        <button name={nickname} onClick={onClickFunc}>
+        <button id={feed.id} onClick={(e) => onClickFunc(e, feed)}>
           게시
         </button>
       </CommentInputConatiner>
